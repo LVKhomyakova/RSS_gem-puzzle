@@ -21,8 +21,7 @@ html {
   color: #008080;
   box-shadow: inset 0px 0px 1px 1px #008080;
   background-color: #b5f5ec;
-  border-radius: 10px;
-  transition: 1s; }
+  border-radius: 10px; }
 
 .container__cell_movable {
   cursor: pointer; }
