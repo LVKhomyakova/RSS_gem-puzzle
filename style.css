@@ -79,6 +79,9 @@ html {
   display: flex;
   justify-content: center;
   align-items: baseline; }
+  @media screen and (max-width: 210px) {
+    .header__settings {
+      display: inline-block; } }
 
 .label-settings {
   font-size: 4vmin;
@@ -91,6 +94,14 @@ html {
 .header__menu {
   display: flex;
   justify-content: center; }
+  @media screen and (max-width: 180px) {
+    .header__menu {
+      font-size: 2vmin;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 2vmin;
+      color: #008080;
+      display: inline-block; } }
 
 .menu__button {
   margin: 2vmin;
