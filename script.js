@@ -366,7 +366,7 @@ function Header() {
   self.buttonResults = null;
   self.labelTime = null;
   self.labelMoves = null;
-  self.timer = null; // handlers
+  self.timer = null;
 
   self.startGame = function () {
     var game = JSON.parse(localStorage.getItem('game'));
@@ -550,6 +550,7 @@ function moveCell(event) {
     cell.classList.remove('animate-right');
   });
   var targetCell = event.target;
+  targetCell.style.animationDuration = '1s';
   var currentDroppable = document.querySelector('.field__container_droppable');
   var nextDroppable = targetCell.parentElement;
   var deltaX = event.clientX - targetCell.getBoundingClientRect().left;
@@ -589,8 +590,10 @@ function moveCell(event) {
 
     if (underElement === currentDroppable) {
       currentDroppable.classList.add('field__container_droppable_active');
+      targetCell.style.animationDuration = '0s';
     } else {
       currentDroppable.classList.remove('field__container_droppable_active');
+      targetCell.style.animationDuration = '1s';
     }
   };
 
