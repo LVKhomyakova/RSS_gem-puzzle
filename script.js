@@ -291,15 +291,23 @@ var Game = /*#__PURE__*/function () {
             containers[i].className = 'field__container field__container_droppable'; // set next movable cells
 
             var movableCellsId = [];
-            movableCellsId.push(Number(containers[i].getAttribute('data-id')) - 1);
-            movableCellsId.push(Number(containers[i].getAttribute('data-id')) + 1);
-            movableCellsId.push(Number(containers[i].getAttribute('data-id')) - this.fieldSize);
-            movableCellsId.push(Number(containers[i].getAttribute('data-id')) + this.fieldSize);
-            movableCellsId.forEach(function (id) {
-              if (cells[id - 1]) {
-                cells[id - 1].classList.add('container__cell_movable');
+
+            if (i % this.fieldSize !== 0) {
+              movableCellsId.push(Number(containers[i].getAttribute('data-id')) - 1);
+            }
+
+            if ((i + 1) % this.fieldSize !== 0) {
+              movableCellsId.push(Number(containers[i].getAttribute('data-id')) + 1);
+            }
+
+            movableCellsId.push(Number(containers[i].getAttribute('data-id')) - Number(this.fieldSize));
+            movableCellsId.push(Number(containers[i].getAttribute('data-id')) + Number(this.fieldSize));
+
+            for (var id = 0; id < movableCellsId.length; id += 1) {
+              if (movableCellsId[id] - 1 > -1 && movableCellsId[id] - 1 < cells.length) {
+                cells[movableCellsId[id] - 1].classList.add('container__cell_movable');
               }
-            });
+            }
           }
         }
 
@@ -573,8 +581,15 @@ function moveCell(event) {
     currentDroppable = nextDroppable; // set next movable cells
 
     var nextMovableCellsId = [];
-    nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) - 1);
-    nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) + 1);
+
+    if ((Number(currentDroppable.getAttribute('data-id')) - 1) % fieldSize !== 0) {
+      nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) - 1);
+    }
+
+    if (Number(currentDroppable.getAttribute('data-id')) % fieldSize !== 0) {
+      nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) + 1);
+    }
+
     nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) - fieldSize);
     nextMovableCellsId.push(Number(currentDroppable.getAttribute('data-id')) + fieldSize);
     document.querySelectorAll('.container__cell').forEach(function (cell) {
